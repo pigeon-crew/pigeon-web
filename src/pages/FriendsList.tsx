@@ -1,8 +1,10 @@
+/** @format */
+
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Colors from '../common/Colors';
 import Dashboard from '../components/layouts/Dashboard';
-import * as API from '../api/auth-api';
+import * as API from '../api/linkApi';
 import { ENDPOINT } from '../utils/config';
 import axios from 'axios';
 import { Formik } from 'formik';

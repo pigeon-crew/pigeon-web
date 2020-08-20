@@ -1,8 +1,9 @@
+/** @format */
+
 import React, { useState } from 'react';
-import { Button } from 'semantic-ui-react';
 import styled from 'styled-components';
-import ModalBackground from './ModalBackground';
 import Colors from '../common/Colors';
+import ModalBackground from './ModalBackground';
 
 const Content = styled.div`
   width: 300px;

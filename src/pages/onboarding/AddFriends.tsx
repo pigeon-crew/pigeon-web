@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { Button } from 'semantic-ui-react';
-import styled from 'styled-components';
-import Header from '../../components/ui/Header';
-import { useHistory } from 'react-router-dom';
-import { ENDPOINT } from '../../utils/config';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+/** @format */
+
 import axios from 'axios';
+import { Formik } from 'formik';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 import Colors from '../../common/Colors';
+import Header from '../../components/ui/Header';
+import { ENDPOINT } from '../../utils/config';
 
 const Container = styled.div`
   position: fixed;

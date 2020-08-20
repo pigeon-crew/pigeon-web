@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Button } from 'semantic-ui-react';
+/** @format */
+
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import Header from '../components/ui/Header';
 import Colors from '../common/Colors';
 import Dashboard from '../components/layouts/Dashboard';
-import { useHistory } from 'react-router-dom';
 
 const Body = styled.div`
   margin: 100px auto 0 auto;

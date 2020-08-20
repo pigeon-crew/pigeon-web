@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { Link } from 'react-router-dom';
@@ -181,6 +183,19 @@ const InputField = styled.input`
   }
 `;
 
+const FooterContainer = styled.div`
+  left: 0;
+  bottom: 0;
+  height: 50px;
+  width: 100%;
+  background-color: ${Colors.pink};
+  color: white;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+`;
+
 const Main = () => {
   const mobile = useMediaQuery({ query: '(max-width: 786px)' });
   const [pushURL, setPushURL] = useState('/signup');
@@ -211,7 +226,7 @@ const Main = () => {
               onChange={handleChange}
             />
             <Link to={pushURL}>
-              <button className="ui primary button">Get Started</button>
+              <button className="button is-info">Get Started</button>
             </Link>
           </LandingTextContainer>
           <LandingGraphic src="/images/social_sharing.svg" />
@@ -269,6 +284,11 @@ const Main = () => {
           </DescriptionTextContainer>
         </DescriptionContainer>
       </BodyContainer>
+      <FooterContainer>
+        <h1 className="has-text-whtie-light">
+          Made with ❤️ at Zoom University
+        </h1>
+      </FooterContainer>
     </Container>
   );
 };

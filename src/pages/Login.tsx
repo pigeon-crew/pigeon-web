@@ -1,21 +1,18 @@
 /** @format */
 
-import axios from 'axios';
 import { Formik } from 'formik';
 import * as React from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Colors from '../common/Colors';
 import Header from '../components/ui/Header';
-import { ENDPOINT } from '../utils/config';
+import auth from '../api/auth';
 
 // TICKETS: Add loading animation to button. Validate email on landing page?
 
 interface FormValues {
   email: string;
-  name: string;
   password: string;
-  confirm: string;
 }
 
 const Headline = styled.h1`
@@ -81,16 +78,12 @@ const ErrorText = styled.p`
   margin: 5px auto 0 auto;
 `;
 
-const Signup = () => {
-  const params = new URLSearchParams(useLocation().search);
-  const emailQuery = params.get('email');
+const Login = () => {
   const history = useHistory();
 
   const initialValues: FormValues = {
-    email: emailQuery || '',
-    name: '',
+    email: '',
     password: '',
-    confirm: '',
   };
 
   const validateSignUp = (values: FormValues) => {
@@ -101,86 +94,33 @@ const Signup = () => {
       errors.email = 'Invalid email address';
     }
 
-    if (!values.name) {
-      errors.name = 'Name is required';
-    }
-
     if (!values.password) {
       errors.password = 'Password is required';
     }
 
-    if (values.confirm !== values.password) {
-      errors.confirm = "Passwords don't match";
-    }
     return errors;
   };
 
-  const handleSubmit = (
-    values: FormValues,
-    { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
-  ) => {
-    const requiredValues = {
-      email: values.email,
-      firstName: values.name.split(' ').slice(0, -1).join(' '),
-      lastName: values.name.split(' ').slice(-1).join(' '),
-      password: values.password,
-    };
-
-    axios({
-      url: `${ENDPOINT}/api/users/signup`,
-      method: 'POST',
-      timeout: 0,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      data: JSON.stringify({
-        ...requiredValues,
-      }),
-    })
-      .then(() => {
-        alert('Sign up success');
-
-        axios({
-          url: `${ENDPOINT}/api/users/login`,
-          method: 'POST',
-          timeout: 0,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          data: JSON.stringify({
-            email: values.email,
-            password: values.password,
-          }),
-        })
-          .then((response) => {
-            localStorage.setItem(
-              'pigeonAccessToken',
-              JSON.stringify({ accessToken: response.data.accessToken })
-            );
-            history.push('/onboarding');
-          })
-          .catch((err: any) => {
-            if (err && err.response && err.response.data) {
-              const errMessage = err.response.data.message;
-              alert(errMessage);
-            }
-          });
-      })
-      .catch((err: any) => {
-        if (err && err.response && err.response.data) {
-          const errMessage = err.response.data.message;
-          alert(errMessage);
-        }
-      });
-
-    setSubmitting(false);
+  const handleSubmit = (values: FormValues) => {
+    auth.login(values);
   };
+
+  const loginComplete = ({ error }: { error?: string }) => {
+    if (!error) {
+      history.push('/links');
+    } else {
+      alert(error);
+      console.error(error);
+    }
+  };
+
+  auth.addLoginSubscribers(loginComplete);
 
   return (
     <Background>
       <Header color={'white'} />
       <>
-        <Headline>Pigeon Sign Up</Headline>
+        <Headline>Welcome Back</Headline>
         <Formik
           initialValues={initialValues}
           validate={validateSignUp}
@@ -224,17 +164,6 @@ const Signup = () => {
                   <ErrorText>{errors.email}</ErrorText>
                 )}
                 <InputField
-                  type="text"
-                  name="name"
-                  value={values.name}
-                  placeholder="Jane Doe"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {errors.name && touched.name && (
-                  <ErrorText>{errors.name}</ErrorText>
-                )}
-                <InputField
                   type="password"
                   name="password"
                   placeholder="Password"
@@ -244,17 +173,6 @@ const Signup = () => {
                 />
                 {errors.password && touched.password && (
                   <ErrorText>{errors.password}</ErrorText>
-                )}
-                <InputField
-                  type="password"
-                  name="confirm"
-                  value={values.confirm}
-                  placeholder="Confirm Password"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {errors.confirm && touched.confirm && (
-                  <ErrorText>{errors.confirm}</ErrorText>
                 )}
                 <ButtonContainer>
                   <button
@@ -277,4 +195,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Login;

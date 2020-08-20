@@ -1,9 +1,10 @@
+/** @format */
+
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Colors from '../../common/Colors';
-
-// TODO: Add AUTH to log out
+import auth from '../../api/auth';
 
 const NavBarContainer = styled.div`
   background-color: rgba(255, 163, 163, 0.15);
@@ -82,7 +83,7 @@ const NavBar = () => {
       {showMenu && (
         <Menu>
           <Link to="/">
-            <MenuItem> Log out</MenuItem>
+            <MenuItem onClick={() => auth.logout()}> Log out</MenuItem>
           </Link>
         </Menu>
       )}
