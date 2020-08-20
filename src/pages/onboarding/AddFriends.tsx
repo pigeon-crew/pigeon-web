@@ -144,7 +144,7 @@ const AddFriends: React.FC<Props> = (props) => {
       })
       .catch((err: any) => {
         const errMessage = err.response.data.message;
-        alert(errMessage);
+        // alert(errMessage);
       });
     setSubmitting(false);
   };
