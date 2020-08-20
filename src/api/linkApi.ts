@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { ENDPOINT } from '../utils/config';
-import axios from 'axios';
+/** @format */
+
+import secureAxios from './apiClient';
 
 const fetchMe = async (accessToken: string): Promise<any> => {
   return new Promise((resolve, reject) => {
-    axios({
-      url: `${ENDPOINT}/api/users/me`,
+    secureAxios({
+      url: '/api/users/me',
       method: 'GET',
       timeout: 0,
       headers: {
@@ -20,10 +20,10 @@ const fetchMe = async (accessToken: string): Promise<any> => {
   });
 };
 
-const fetchMetadata = async (link: string): Promise<any> => {
+const fetchMetadata = (link: string) => {
   return new Promise((resolve, reject) => {
-    axios({
-      url: `${ENDPOINT}/api/links/preview`,
+    secureAxios({
+      url: '/api/links/preview',
       method: 'POST',
       timeout: 0,
       headers: {
@@ -41,4 +41,30 @@ const fetchMetadata = async (link: string): Promise<any> => {
   });
 };
 
-export { fetchMe, fetchMetadata };
+const fetchMyFeed = (
+  accessToken: string,
+  limit = '',
+  archive = 'false',
+  author = '',
+  like = 'false'
+) => {
+  return new Promise((resolve, reject) => {
+    let url = `/api/links/me?limit=${limit}&archive=${archive}&author=${author}&like=${like}`;
+
+    secureAxios({
+      url,
+      method: 'GET',
+      timeout: 0,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then((res) => {
+        const links = res.data.links;
+        resolve(links);
+      })
+      .catch((err) => reject(err.response));
+  });
+};
+
+export { fetchMe, fetchMetadata, fetchMyFeed };
