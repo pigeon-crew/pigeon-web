@@ -1,7 +1,7 @@
 /** @format */
 
 import React from 'react';
-import { BrowserRouter as Router, Redirect, Switch } from 'react-router-dom';
+import { HashRouter as Router, Switch } from 'react-router-dom';
 import PrivateRoute from '../components/routes/PrivateRoute';
 import PublicRoute from '../components/routes/PublicRoute';
 import AccountSettings from './AccountSettings';
@@ -21,7 +21,7 @@ const AppRouter = () => {
         <PrivateRoute exact path="/links" component={Links} />
         <PrivateRoute exact path="/account" component={AccountSettings} />
         <PrivateRoute exact path="/friends" component={FriendsList} />
-        <Redirect to="/" />
+        <PublicRoute exact={false} path="/" component={Main} />
       </Switch>
     </Router>
   );
