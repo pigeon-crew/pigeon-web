@@ -25,7 +25,7 @@ const AppRouter = () => {
         <PublicRoute exact path="/" component={Main} />
         <PublicRoute exact path="/signup" component={Signup} />
         <PublicRoute exact path="/login" component={Login} />
-        <PrivateRoute exact path="/onboarding" component={AddFriends} />
+        {/* <PrivateRoute exact path="/onboarding" component={AddFriends} /> */}
         <PrivateRoute exact path="/links" component={Links} />
         <PrivateRoute exact path="/account" component={AccountSettings} />
         <PrivateRoute exact path="/friends" component={FriendsList} />

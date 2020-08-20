@@ -1,13 +1,12 @@
 /** @format */
 
-import axios from 'axios';
 import { Formik } from 'formik';
 import * as React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Colors from '../common/Colors';
 import Header from '../components/ui/Header';
-import { ENDPOINT } from '../utils/config';
+import { signup } from '../api/userApi';
 
 // TICKETS: Add loading animation to button. Validate email on landing page?
 
@@ -126,52 +125,12 @@ const Signup = () => {
       password: values.password,
     };
 
-    axios({
-      url: `${ENDPOINT}/api/users/signup`,
-      method: 'POST',
-      timeout: 0,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      data: JSON.stringify({
-        ...requiredValues,
-      }),
-    })
+    signup(requiredValues)
       .then(() => {
-        alert('Sign up success');
-
-        axios({
-          url: `${ENDPOINT}/api/users/login`,
-          method: 'POST',
-          timeout: 0,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          data: JSON.stringify({
-            email: values.email,
-            password: values.password,
-          }),
-        })
-          .then((response) => {
-            localStorage.setItem(
-              'pigeonAccessToken',
-              JSON.stringify({ accessToken: response.data.accessToken })
-            );
-            history.push('/onboarding');
-          })
-          .catch((err: any) => {
-            if (err && err.response && err.response.data) {
-              const errMessage = err.response.data.message;
-              alert(errMessage);
-            }
-          });
+        alert('Sign up success!');
+        history.push('/login');
       })
-      .catch((err: any) => {
-        if (err && err.response && err.response.data) {
-          const errMessage = err.response.data.message;
-          alert(errMessage);
-        }
-      });
+      .catch(() => alert('Oops... Something went wrong.'));
 
     setSubmitting(false);
   };
