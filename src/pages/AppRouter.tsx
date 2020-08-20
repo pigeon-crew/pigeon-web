@@ -1,31 +1,23 @@
 /** @format */
 
 import React from 'react';
-import Main from './Main';
-import Signup from './Signup';
-import AddFriends from './onboarding/AddFriends';
-import Links from './Links';
+import { BrowserRouter as Router, Redirect, Switch } from 'react-router-dom';
+import PrivateRoute from '../components/routes/PrivateRoute';
+import PublicRoute from '../components/routes/PublicRoute';
 import AccountSettings from './AccountSettings';
 import FriendsList from './FriendsList';
+import Links from './Links';
 import Login from './Login';
-import PublicRoute from '../components/routes/PublicRoute';
-import PrivateRoute from '../components/routes/PrivateRoute';
-
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from 'react-router-dom';
+import Main from './Main';
+import Signup from './Signup';
 
 const AppRouter = () => {
   return (
     <Router>
       <Switch>
         <PublicRoute exact path="/" component={Main} />
-        <PublicRoute exact path="/signup" component={Signup} />
         <PublicRoute exact path="/login" component={Login} />
-        {/* <PrivateRoute exact path="/onboarding" component={AddFriends} /> */}
+        <PublicRoute exact path="/signup" component={Signup} />
         <PrivateRoute exact path="/links" component={Links} />
         <PrivateRoute exact path="/account" component={AccountSettings} />
         <PrivateRoute exact path="/friends" component={FriendsList} />
