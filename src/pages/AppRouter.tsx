@@ -1,7 +1,7 @@
 /** @format */
 
 import React from 'react';
-import { HashRouter as Router, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import PrivateRoute from '../components/routes/PrivateRoute';
 import PublicRoute from '../components/routes/PublicRoute';
 import AccountSettings from './AccountSettings';
