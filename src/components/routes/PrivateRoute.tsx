@@ -1,5 +1,3 @@
-/** @format */
-
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import auth from '../../api/auth';
@@ -14,7 +12,7 @@ const PrivateRoute: React.FC<{
   return condition ? (
     <Route path={props.path} exact={props.exact} component={props.component} />
   ) : (
-    <Redirect to="/login" />
+    <Redirect to='/login' />
   );
 };
 export default PrivateRoute;

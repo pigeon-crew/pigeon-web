@@ -1,5 +1,3 @@
-/** @format */
-
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import auth from '../../api/auth';
@@ -12,7 +10,7 @@ const PublicRoute: React.FC<{
   const condition = auth.isAuthenticated();
 
   return condition ? (
-    <Redirect to="/links" />
+    <Redirect to='/dashboard' />
   ) : (
     <Route path={props.path} exact={props.exact} component={props.component} />
   );

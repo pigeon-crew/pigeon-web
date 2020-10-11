@@ -1,5 +1,3 @@
-/** @format */
-
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { ENDPOINT } from '../utils/config';
 import auth from './auth';
