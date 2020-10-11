@@ -2,10 +2,10 @@
 
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Dashboard from '../components/layouts/Dashboard';
-import { fetchMyFeed } from '../api/linkApi';
-import LinkCard from '../components/ui/LinkCard';
-import auth from '../api/auth';
+import Dashboard from '../../components/layouts/Dashboard';
+import { fetchMyFeed } from '../../api/linkApi';
+import LinkCard from '../../components/ui/LinkCard';
+import auth from '../../api/auth';
 
 const Body = styled.div`
   margin: 30px 0 0 50px;
@@ -47,7 +47,7 @@ const Links = () => {
   return (
     <Dashboard installExtensionOpen={renderModal}>
       <Body>
-        <h1 className="title">Browse Your Links</h1>
+        <h1 className='title'>Browse Your Links</h1>
         {myFeed &&
           myFeed.map((link: Link) => <LinkCard key={link._id} link={link} />)}
       </Body>

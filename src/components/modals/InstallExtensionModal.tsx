@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Colors from '../common/Colors';
+import Colors from '../../common/Colors';
 import ModalBackground from './ModalBackground';
 
 const Content = styled.div`
@@ -49,7 +49,7 @@ const InstallExtensionModal = () => {
           <Content>
             <Header>
               <CloseButton
-                src="/images/close_button.svg"
+                src='/images/close_button.svg'
                 onClick={() => {
                   setShow(false);
                 }}
@@ -62,8 +62,8 @@ const InstallExtensionModal = () => {
               possible.{' '}
             </Desc>
             <button
-              type="submit"
-              className="ui primary button"
+              type='submit'
+              className='ui primary button'
               style={{
                 backgroundColor: Colors.pink,
                 marginTop: '20px',

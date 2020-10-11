@@ -47,10 +47,10 @@ const FieldWrapper = ({
   if (!icon) return children;
 
   return (
-    <div className="field">
-      <p className="control has-icons-left has-icons-right">
+    <div className='field'>
+      <p className='control has-icons-left has-icons-right'>
         {children}
-        <span className="icon is-small is-left">
+        <span className='icon is-small is-left'>
           <i className={`fas ${icon}`}></i>
         </span>
       </p>
@@ -104,37 +104,37 @@ const CreateAnnotationModal: React.FC<any> = (props) => {
   return (
     <>
       {props.show && (
-        <div className="modal is-active">
-          <div className="modal-background"></div>
-          <div className="modal-card">
-            <header className="modal-card-head">
-              <p className="modal-card-title">
+        <div className='modal is-active'>
+          <div className='modal-background'></div>
+          <div className='modal-card'>
+            <header className='modal-card-head'>
+              <p className='modal-card-title'>
                 Annotate an interesting link 😍
               </p>
               <button
-                className="delete"
-                aria-label="close"
+                className='delete'
+                aria-label='close'
                 onClick={() => props.setShow(false)}
               ></button>
             </header>
-            <section className="modal-card-body">
+            <section className='modal-card-body'>
               <Formik initialValues={initialValues} onSubmit={handleSubmit}>
                 <Form>
-                  <FieldWrapper icon="fa-link">
+                  <FieldWrapper icon='fa-link'>
                     <Field
-                      name="link"
-                      className="input"
-                      type="link"
-                      placeholder="https://hackmit.org/"
+                      name='link'
+                      className='input'
+                      type='link'
+                      placeholder='https://hackmit.org/'
                     />
                   </FieldWrapper>
                   <Button
-                    className="button is-primary is-light is-outlined"
+                    className='button is-primary is-light is-outlined'
                     onClick={() => setIsLoading(true)}
-                    type="submit"
+                    type='submit'
                   >
-                    <span className="icon">
-                      <i className="fas fa-file-import"></i>
+                    <span className='icon'>
+                      <i className='fas fa-file-import'></i>
                     </span>
                     <span>Fetch content</span>
                   </Button>
@@ -150,9 +150,9 @@ const CreateAnnotationModal: React.FC<any> = (props) => {
                 </>
               )}
             </section>
-            <footer className="modal-card-foot">
+            <footer className='modal-card-foot'>
               <button
-                className="button is-primary is-light is-outlined"
+                className='button is-primary is-light is-outlined'
                 onClick={() => {
                   handleAnnotate();
                   addLink(title || 'To fix', img || '');
@@ -161,7 +161,7 @@ const CreateAnnotationModal: React.FC<any> = (props) => {
                 Annotate
               </button>
               <button
-                className="button is-success is-light"
+                className='button is-success is-light'
                 onClick={() => {
                   addLink(title || 'To fix', img || '');
                   props.setShow(false);
@@ -169,7 +169,7 @@ const CreateAnnotationModal: React.FC<any> = (props) => {
               >
                 Skip Annotation
               </button>
-              <button className="button" onClick={() => props.setShow(false)}>
+              <button className='button' onClick={() => props.setShow(false)}>
                 Cancel
               </button>
             </footer>

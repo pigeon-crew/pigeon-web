@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Colors from '../common/Colors';
-import Dashboard from '../components/layouts/Dashboard';
-import * as API from '../api/linkApi';
-import { ENDPOINT } from '../utils/config';
+import Colors from '../../common/Colors';
+import Dashboard from '../../components/layouts/Dashboard';
+import * as API from '../../api/linkApi';
+import { ENDPOINT } from '../../utils/config';
 import axios from 'axios';
 import { Formik } from 'formik';
 
@@ -128,36 +128,7 @@ const ErrorText = styled.p`
 
 const Friends = () => {
   useEffect(() => {
-    const accessTokenData = JSON.parse(
-      localStorage.getItem('pigeonAccessToken') || '{}'
-    );
-
-    const getUserID = async () => {
-      return await API.fetchMe(accessTokenData.accessToken);
-    };
-
-    getUserID().then((result) => {
-      axios({
-        url: `${ENDPOINT}/api/friends/current`,
-        method: 'GET',
-        timeout: 0,
-        headers: {
-          Authorization: `Bearer ${accessTokenData.accessToken}`,
-        },
-        data: JSON.stringify({
-          userID: result.id,
-        }),
-      })
-        .then((response) => {
-          setFriends(response.data.data);
-        })
-        .catch((err: any) => {
-          if (err && err.response && err.response.data) {
-            const errMessage = err.response.data.message;
-            alert(errMessage);
-          }
-        });
-    });
+    // todo
   }, []);
 
   const initialValues: FormValues = {
@@ -223,9 +194,9 @@ const Friends = () => {
               {placeholderRequests.map((request) => (
                 <RequestContainer key={request}>
                   <OptionsContainer>
-                    <Option src="/images/thumbs-up-solid.svg" />
+                    <Option src='/images/thumbs-up-solid.svg' />
                     <Option
-                      src="/images/thumbs-down-solid.svg"
+                      src='/images/thumbs-down-solid.svg'
                       style={{
                         marginTop: '4px',
                       }}
@@ -282,10 +253,10 @@ const Friends = () => {
               <>
                 <FormContainer onSubmit={handleSubmit}>
                   <InputField
-                    type="text"
-                    name="name"
+                    type='text'
+                    name='name'
                     value={values.name}
-                    placeholder="Jane Doe"
+                    placeholder='Jane Doe'
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
@@ -293,10 +264,10 @@ const Friends = () => {
                     <ErrorText>{errors.name}</ErrorText>
                   )}
                   <InputField
-                    type="text"
-                    name="email"
+                    type='text'
+                    name='email'
                     value={values.email}
-                    placeholder="janedoe@gmail.com"
+                    placeholder='janedoe@gmail.com'
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
@@ -306,8 +277,8 @@ const Friends = () => {
 
                   <ButtonContainer>
                     <button
-                      type="submit"
-                      className="ui primary button"
+                      type='submit'
+                      className='ui primary button'
                       style={{
                         margin: '15px auto 0 auto',
                         backgroundColor: 'green',
@@ -321,8 +292,8 @@ const Friends = () => {
                   </ButtonContainer>
                   <ButtonContainer>
                     <button
-                      type="submit"
-                      className="ui primary button"
+                      type='submit'
+                      className='ui primary button'
                       style={{
                         margin: '15px auto 0 auto',
                         backgroundColor: 'rgba(72,72,72,0.7)',
@@ -340,8 +311,8 @@ const Friends = () => {
                     }}
                   >
                     <button
-                      type="submit"
-                      className="ui primary button"
+                      type='submit'
+                      className='ui primary button'
                       style={{ margin: '15px auto 0 auto' }}
                       onClick={() => {}}
                     >

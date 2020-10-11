@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import InstallExtensionModal from '../../modals/InstallExtensionModal';
+import InstallExtensionModal from '../modals/InstallExtensionModal';
 import Sidebar from '../ui/Sidebar';
 import NavBar from '../ui/NavBar';
 

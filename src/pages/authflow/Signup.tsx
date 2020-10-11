@@ -2,17 +2,19 @@
 
 import { Formik } from 'formik';
 import * as React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import Colors from '../common/Colors';
-import Header from '../components/ui/Header';
-import auth from '../api/auth';
+import Colors from '../../common/Colors';
+import Header from '../../components/ui/Header';
+import { signup } from '../../api/userApi';
 
 // TICKETS: Add loading animation to button. Validate email on landing page?
 
 interface FormValues {
   email: string;
+  name: string;
   password: string;
+  confirm: string;
 }
 
 const Headline = styled.h1`
@@ -78,12 +80,16 @@ const ErrorText = styled.p`
   margin: 5px auto 0 auto;
 `;
 
-const Login = () => {
+const Signup = () => {
+  const params = new URLSearchParams(useLocation().search);
+  const emailQuery = params.get('email');
   const history = useHistory();
 
   const initialValues: FormValues = {
-    email: '',
+    email: emailQuery || '',
+    name: '',
     password: '',
+    confirm: '',
   };
 
   const validateSignUp = (values: FormValues) => {
@@ -94,33 +100,46 @@ const Login = () => {
       errors.email = 'Invalid email address';
     }
 
+    if (!values.name) {
+      errors.name = 'Name is required';
+    }
+
     if (!values.password) {
       errors.password = 'Password is required';
     }
 
+    if (values.confirm !== values.password) {
+      errors.confirm = "Passwords don't match";
+    }
     return errors;
   };
 
-  const handleSubmit = (values: FormValues) => {
-    auth.login(values);
-  };
+  const handleSubmit = (
+    values: FormValues,
+    { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
+  ) => {
+    const requiredValues = {
+      email: values.email,
+      firstName: values.name.split(' ').slice(0, -1).join(' '),
+      lastName: values.name.split(' ').slice(-1).join(' '),
+      password: values.password,
+    };
 
-  const loginComplete = ({ error }: { error?: string }) => {
-    if (!error) {
-      history.push('/links');
-    } else {
-      alert(error);
-      console.error(error);
-    }
-  };
+    signup(requiredValues)
+      .then(() => {
+        alert('Sign up success!');
+        history.push('/login');
+      })
+      .catch(() => alert('Oops... Something went wrong.'));
 
-  auth.addLoginSubscribers(loginComplete);
+    setSubmitting(false);
+  };
 
   return (
     <Background>
       <Header color={'white'} />
       <>
-        <Headline>Welcome Back</Headline>
+        <Headline>Pigeon Sign Up</Headline>
         <Formik
           initialValues={initialValues}
           validate={validateSignUp}
@@ -153,10 +172,10 @@ const Login = () => {
             <>
               <FormContainer onSubmit={handleSubmit}>
                 <InputField
-                  type="text"
-                  name="email"
+                  type='text'
+                  name='email'
                   value={values.email}
-                  placeholder="janedoe@gmail.com"
+                  placeholder='janedoe@gmail.com'
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
@@ -164,9 +183,20 @@ const Login = () => {
                   <ErrorText>{errors.email}</ErrorText>
                 )}
                 <InputField
-                  type="password"
-                  name="password"
-                  placeholder="Password"
+                  type='text'
+                  name='name'
+                  value={values.name}
+                  placeholder='Jane Doe'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.name && touched.name && (
+                  <ErrorText>{errors.name}</ErrorText>
+                )}
+                <InputField
+                  type='password'
+                  name='password'
+                  placeholder='Password'
                   value={values.password}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -174,10 +204,21 @@ const Login = () => {
                 {errors.password && touched.password && (
                   <ErrorText>{errors.password}</ErrorText>
                 )}
+                <InputField
+                  type='password'
+                  name='confirm'
+                  value={values.confirm}
+                  placeholder='Confirm Password'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.confirm && touched.confirm && (
+                  <ErrorText>{errors.confirm}</ErrorText>
+                )}
                 <ButtonContainer>
                   <button
-                    type="submit"
-                    className="button is-info"
+                    type='submit'
+                    className='button is-info'
                     style={{ margin: '15px auto 0 auto' }}
                     onClick={(e) => {
                       handleSubmit(e);
@@ -195,4 +236,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

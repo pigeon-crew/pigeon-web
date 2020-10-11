@@ -3,8 +3,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import Colors from '../common/Colors';
-import Dashboard from '../components/layouts/Dashboard';
+import Colors from '../../common/Colors';
+import Dashboard from '../../components/layouts/Dashboard';
 
 const Body = styled.div`
   margin: 100px auto 0 auto;
@@ -32,8 +32,8 @@ const AccountSettings = () => {
       <Body>
         <h1>Account Settings</h1>
         <button
-          type="submit"
-          className="ui primary button"
+          type='submit'
+          className='ui primary button'
           style={{ margin: '15px auto 0 auto' }}
           onClick={(e) => {
             history.push('/');

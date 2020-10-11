@@ -196,7 +196,7 @@ const FooterContainer = styled.div`
   justify-content: space-around;
 `;
 
-const Main = () => {
+const Landing = () => {
   const mobile = useMediaQuery({ query: '(max-width: 786px)' });
   const [pushURL, setPushURL] = useState('/signup');
 
@@ -220,16 +220,16 @@ const Main = () => {
           <LandingTextContainer>
             <H1>Spark quality conversations by sharing links.</H1>
             <InputField
-              type="text"
-              name="email"
-              placeholder="Enter email"
+              type='text'
+              name='email'
+              placeholder='Enter email'
               onChange={handleChange}
             />
             <Link to={pushURL}>
-              <button className="button is-info">Get Started</button>
+              <button className='button is-info'>Get Started</button>
             </Link>
           </LandingTextContainer>
-          <LandingGraphic src="/images/social_sharing.svg" />
+          <LandingGraphic src='/images/social_sharing.svg' />
         </Content>
       </IntroContainer>
       <BodyContainer>
@@ -239,21 +239,21 @@ const Main = () => {
           </Title>
           <ModuleContainer>
             <ModuleBox>
-              <ModuleImage src="/images/hangout.png" />
+              <ModuleImage src='/images/hangout.png' />
               <Paragraph style={{ marginTop: '50px' }}>
                 You're scrambling to share a Google Doc link on Zoom
               </Paragraph>
             </ModuleBox>
 
             <ModuleBox>
-              <ModuleImage src="/images/question.png" />
+              <ModuleImage src='/images/question.png' />
               <Paragraph style={{ marginTop: '50px' }}>
                 You lost an important link that your friend shared with you
               </Paragraph>
             </ModuleBox>
 
             <ModuleBox>
-              <ModuleImage src="/images/friends.png" />
+              <ModuleImage src='/images/friends.png' />
               <Paragraph style={{ marginTop: '50px' }}>
                 You want to check out what's trending among your friends
               </Paragraph>
@@ -261,7 +261,7 @@ const Main = () => {
           </ModuleContainer>
         </UseCaseContainer>
         <DescriptionContainer>
-          <DescriptionGraphic src="/images/linked.svg" />
+          <DescriptionGraphic src='/images/linked.svg' />
           <DescriptionTextContainer>
             <Title>What is Pigeon?</Title>
             <H3>
@@ -285,7 +285,7 @@ const Main = () => {
         </DescriptionContainer>
       </BodyContainer>
       <FooterContainer>
-        <h1 className="has-text-whtie-light">
+        <h1 className='has-text-whtie-light'>
           Made with ❤️ at Zoom University
         </h1>
       </FooterContainer>
@@ -293,4 +293,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Landing;

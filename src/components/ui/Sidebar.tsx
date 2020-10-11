@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Colors from '../../common/Colors';
-import InstallExtensionModal from '../../modals/InstallExtensionModal';
+import InstallExtensionModal from '../modals/InstallExtensionModal';
 
 const SidebarContainer = styled.div`
   display: flex;
@@ -87,9 +87,9 @@ const Sidebar: React.FC<Props> = (props) => {
           </SidebarOption>
         </Link>
       ))}
-      <a href="mailto:sieger2@illinois.edu?subject=Downloading the Pigeon Extension&amp;body=Joseph will email you the zip file containing the Pigeon extension!">
+      <a href='mailto:sieger2@illinois.edu?subject=Downloading the Pigeon Extension&amp;body=Joseph will email you the zip file containing the Pigeon extension!'>
         <SidebarOption>
-          <Icon src="/images/download-solid.svg" />
+          <Icon src='/images/download-solid.svg' />
           <SidebarLabel>Extension</SidebarLabel>
         </SidebarOption>
       </a>

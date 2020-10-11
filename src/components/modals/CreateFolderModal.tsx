@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
 import { Field, FieldAttributes, Form, Formik } from 'formik';
-import { fetchMe } from '../../api/userApi';
-import { createLibrary } from '../../api/libraryApi';
+import React from 'react';
 import auth from '../../api/auth';
+import { createLibrary } from '../../api/libraryApi';
+import { fetchMe } from '../../api/userApi';
 
 interface AnnotateParams {
   folderName: string;
@@ -28,10 +27,10 @@ const FieldWrapper = ({
   if (!icon) return children;
 
   return (
-    <div className="field">
-      <p className="control has-icons-left has-icons-right">
+    <div className='field'>
+      <p className='control has-icons-left has-icons-right'>
         {children}
-        <span className="icon is-small is-left">
+        <span className='icon is-small is-left'>
           <i className={`fas ${icon}`}></i>
         </span>
       </p>
@@ -60,33 +59,33 @@ const CreateFolderModal: React.FC<any> = (props) => {
   return (
     <>
       {props.show && (
-        <div className="modal is-active">
-          <div className="modal-background"></div>
-          <div className="modal-card">
-            <header className="modal-card-head">
-              <p className="modal-card-title">
+        <div className='modal is-active'>
+          <div className='modal-background'></div>
+          <div className='modal-card'>
+            <header className='modal-card-head'>
+              <p className='modal-card-title'>
                 Group annotations under shared themes
               </p>
               <button
-                className="delete"
-                aria-label="close"
+                className='delete'
+                aria-label='close'
                 onClick={() => props.setShow(false)}
               ></button>
             </header>
-            <section className="modal-card-body">
+            <section className='modal-card-body'>
               <Formik initialValues={initialValues} onSubmit={handleSubmit}>
                 <Form>
-                  <FieldWrapper icon="fas fa-folder-plus">
+                  <FieldWrapper icon='fas fa-folder-plus'>
                     <Field
-                      name="folderName"
-                      className="input"
-                      type="folderName"
-                      placeholder="Vote 🙏"
+                      name='folderName'
+                      className='input'
+                      type='folderName'
+                      placeholder='Vote 🙏'
                     />
                   </FieldWrapper>
                   <button
-                    type="submit"
-                    className="button is-primary is-light is-outlined"
+                    type='submit'
+                    className='button is-primary is-light is-outlined'
                   >
                     Create folder
                   </button>
