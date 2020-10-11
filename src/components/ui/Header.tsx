@@ -1,5 +1,3 @@
-/** @format */
-
 import * as React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
@@ -32,7 +30,7 @@ interface Props {
 const Header: React.FC<Props> = (props) => {
   return (
     <NavBar>
-      <Link to="/">
+      <Link to='/'>
         <Logo>🐦</Logo>
       </Link>
       <PigeonName
