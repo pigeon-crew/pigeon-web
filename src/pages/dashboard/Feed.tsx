@@ -1,11 +1,12 @@
 /** @format */
 
 import React, { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 import styled from 'styled-components';
-import Dashboard from '../../components/layouts/Dashboard';
-import { fetchMyFeed } from '../../api/linkApi';
-import LinkCard from '../../components/ui/LinkCard';
 import auth from '../../api/auth';
+import { fetchMyFeed } from '../../api/linkApi';
+import Dashboard from '../../components/layouts/Dashboard';
+import LinkCard from '../../components/ui/LinkCard';
 
 const Body = styled.div`
   margin: 30px 0 0 50px;
@@ -25,7 +26,10 @@ interface Link {
 
 const Feed = () => {
   const [renderModal, setRenderModal] = useState(false);
-  const [myFeed, setMyFeed] = useState();
+  const feedQuery = useQuery(
+    ['fetchMyFeed', { accessToken: auth.getAccessToken() }],
+    fetchMyFeed
+  );
 
   useEffect(() => {
     const visited = localStorage.getItem('visited');
@@ -33,23 +37,23 @@ const Feed = () => {
       setRenderModal(true);
       localStorage.setItem('visited', '1');
     }
-
-    fetchMyFeed(auth.getAccessToken())
-      .then((res) => {
-        let data = res as any;
-        setMyFeed(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   }, []);
+
+  const LinkFeed = (res: any) => {
+    const data = res as Link[];
+    if (data.length < 1) return <h1>Oops. No links yet.</h1>;
+
+    return data.map((link) => <LinkCard key={link._id} link={link} />);
+  };
 
   return (
     <Dashboard installExtensionOpen={renderModal}>
       <Body>
         <h1 className='title'>Browse Your Links</h1>
-        {myFeed &&
-          myFeed.map((link: Link) => <LinkCard key={link._id} link={link} />)}
+        <div style={{ margin: '40px 0px', width: '60%' }}>
+          {feedQuery.isLoading && <h1>Loading...</h1>}
+          {feedQuery.data && LinkFeed(feedQuery.data)}
+        </div>
       </Body>
     </Dashboard>
   );
