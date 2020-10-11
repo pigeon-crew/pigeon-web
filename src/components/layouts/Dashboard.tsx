@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import InstallExtensionModal from '../modals/InstallExtensionModal';
-import Sidebar from '../ui/Sidebar';
 import NavBar from '../ui/NavBar';
-
-// AUTH LOGIC HERE
+import Sidebar from '../ui/Sidebar';
 
 interface Props {
   children: any;

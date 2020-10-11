@@ -12,15 +12,12 @@ import styled from 'styled-components';
 const SidebarContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 25px 0px;
+  padding-bottom: 40px;
   max-width: 200px;
   width: 100%;
-  min-height: 100vh;
-  border-right: 1px solid rgba(72, 72, 72, 0.2);
   margin-left: 2.5rem;
+  margin-top: 4%;
 `;
-
-// TODO: Add selected button styling
 
 const SidebarOption = styled.div`
   display: flex;
@@ -30,13 +27,13 @@ const SidebarOption = styled.div`
   margin: 0 auto 20px 0;
   text-align: center;
   background-color: rgba(72, 72, 72, 0.05);
-  padding: 15px 0;
-  border-radius: 40px;
+  padding: 5px 0;
+  border-radius: 10px;
 
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 10px;
     opacity: 0.9;
-    background-color: rgba(255, 163, 163, 0.15);
+    background-color: rgba(44, 62, 80, 0.1);
   }
   &:active {
     opacity: 0.6;
@@ -92,18 +89,20 @@ const options: SidebarOptions[] = [
 const Sidebar: React.FC<Props> = (props) => {
   return (
     <SidebarContainer>
-      {options.map((option) => (
-        <Link
-          to={option.path || '/'}
-          key={option.title + option.path}
-          style={{ color: 'gray' }}
-        >
-          <SidebarOption>
-            <Icon>{option.icon}</Icon>
-            <SidebarLabel>{option.title}</SidebarLabel>
-          </SidebarOption>
-        </Link>
-      ))}
+      {options.map((option) => {
+        return (
+          <Link
+            to={option.path || '/'}
+            key={option.title + option.path}
+            style={{ color: 'gray' }}
+          >
+            <SidebarOption>
+              <Icon>{option.icon}</Icon>
+              <SidebarLabel>{option.title}</SidebarLabel>
+            </SidebarOption>
+          </Link>
+        );
+      })}
     </SidebarContainer>
   );
 };
