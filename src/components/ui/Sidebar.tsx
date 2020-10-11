@@ -1,8 +1,13 @@
-import React, { useState, useRef } from 'react';
-import styled from 'styled-components';
+import React from 'react';
+import {
+  MdContactMail,
+  MdHome,
+  MdPalette,
+  MdPeople,
+  MdFileDownload,
+} from 'react-icons/md';
 import { Link } from 'react-router-dom';
-import Colors from '../../common/Colors';
-import InstallExtensionModal from '../modals/InstallExtensionModal';
+import styled from 'styled-components';
 
 const SidebarContainer = styled.div`
   display: flex;
@@ -44,10 +49,8 @@ const SidebarLabel = styled.div`
   color: black;
 `;
 
-const Icon = styled.img`
-  margin-left: 15px;
-  margin-right: 15px;
-  max-height: 20px;
+const Icon = styled.div`
+  margin: 0 15px;
 `;
 
 interface Props {}
@@ -55,20 +58,34 @@ interface Props {}
 interface SidebarOptions {
   title: string;
   path?: string;
-  icon?: string;
+  icon?: JSX.Element;
 }
 
-// TODO: Change extension link to chrome webstore
 const options: SidebarOptions[] = [
   {
-    title: 'Links',
-    path: '/links',
-    icon: '/images/link-solid.svg',
+    title: 'Feed',
+    path: '/feed',
+    icon: <MdHome size={25} />,
   },
   {
-    title: 'Friends List',
+    title: 'Profile',
+    path: '/profile',
+    icon: <MdPalette size={25} />,
+  },
+  {
+    title: 'Chatbot',
+    path: '/chatbot',
+    icon: <MdContactMail size={25} />,
+  },
+  {
+    title: 'Friends',
     path: '/friends',
-    icon: '/images/user-friends-solid.svg',
+    icon: <MdPeople size={25} />,
+  },
+  {
+    title: 'Extension',
+    path: '/',
+    icon: <MdFileDownload size={25} />,
   },
 ];
 
@@ -82,17 +99,11 @@ const Sidebar: React.FC<Props> = (props) => {
           style={{ color: 'gray' }}
         >
           <SidebarOption>
-            <Icon src={option.icon} />
+            <Icon>{option.icon}</Icon>
             <SidebarLabel>{option.title}</SidebarLabel>
           </SidebarOption>
         </Link>
       ))}
-      <a href='mailto:sieger2@illinois.edu?subject=Downloading the Pigeon Extension&amp;body=Joseph will email you the zip file containing the Pigeon extension!'>
-        <SidebarOption>
-          <Icon src='/images/download-solid.svg' />
-          <SidebarLabel>Extension</SidebarLabel>
-        </SidebarOption>
-      </a>
     </SidebarContainer>
   );
 };

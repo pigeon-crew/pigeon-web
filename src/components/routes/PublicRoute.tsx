@@ -10,7 +10,7 @@ const PublicRoute: React.FC<{
   const condition = auth.isAuthenticated();
 
   return condition ? (
-    <Redirect to='/dashboard' />
+    <Redirect to='/feed' />
   ) : (
     <Route path={props.path} exact={props.exact} component={props.component} />
   );

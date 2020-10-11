@@ -23,7 +23,7 @@ interface Link {
   _id: string;
 }
 
-const Links = () => {
+const Feed = () => {
   const [renderModal, setRenderModal] = useState(false);
   const [myFeed, setMyFeed] = useState();
 
@@ -55,4 +55,4 @@ const Links = () => {
   );
 };
 
-export default Links;
+export default Feed;
